@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonaDTO {
-    private long dni;
+    private String dni;
     private String nombre;
     private String apellido;
     private String empleado;

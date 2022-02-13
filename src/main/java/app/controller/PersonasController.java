@@ -8,10 +8,7 @@ import app.service.IPersonasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/personas")
@@ -29,12 +26,12 @@ public class PersonasController {
         return new ResponseEntity<>(personasService.altaPersona(persona), HttpStatus.OK);
     }
 
-    @PostMapping("/baja")
-    public ResponseEntity<PersonaDTO> bajaPersona(@RequestBody PersonaDTO persona) throws PersonaDoesntExistDeleteException {
-        return new ResponseEntity<>(personasService.bajaPersona(persona), HttpStatus.OK);
+    @DeleteMapping("/baja/{dniPersona}")
+    public ResponseEntity<PersonaDTO> bajaPersona(@PathVariable String dniPersona) throws PersonaDoesntExistDeleteException {
+        return new ResponseEntity<>(personasService.bajaPersona(dniPersona), HttpStatus.OK);
     }
 
-    @PostMapping("/modificacion")
+    @PutMapping("/modificacion")
     public ResponseEntity<PersonaDTO> modificacionPersona(@RequestBody PersonaDTO persona) throws PersonaDoesntExistUpdateException {
         return new ResponseEntity<>(personasService.modificacionPersona(persona), HttpStatus.OK);
     }

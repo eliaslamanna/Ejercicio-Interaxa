@@ -7,6 +7,6 @@ import app.model.dto.PersonaDTO;
 
 public interface IPersonasService {
     PersonaDTO altaPersona(PersonaDTO persona) throws PersonaAlreadyExistsException;
-    PersonaDTO bajaPersona(PersonaDTO persona) throws PersonaDoesntExistDeleteException;
+    PersonaDTO bajaPersona(String dniPersona) throws PersonaDoesntExistDeleteException;
     PersonaDTO modificacionPersona(PersonaDTO persona) throws PersonaDoesntExistUpdateException;
 }
