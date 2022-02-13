@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,17 +22,17 @@ public class PersonasController {
     }
 
     @PostMapping("/alta")
-    public ResponseEntity<PersonaDTO> altaPersona(PersonaDTO persona) {
+    public ResponseEntity<PersonaDTO> altaPersona(@RequestBody PersonaDTO persona) {
         return new ResponseEntity<>(personasService.altaPersona(persona), HttpStatus.OK);
     }
 
     @PostMapping("/baja")
-    public ResponseEntity<PersonaDTO> bajaPersona(PersonaDTO persona) {
+    public ResponseEntity<PersonaDTO> bajaPersona(@RequestBody PersonaDTO persona) {
         return new ResponseEntity<>(personasService.bajaPersona(persona), HttpStatus.OK);
     }
 
     @PostMapping("/modificacion")
-    public ResponseEntity<PersonaDTO> modificacionPersona(PersonaDTO persona) {
+    public ResponseEntity<PersonaDTO> modificacionPersona(@RequestBody PersonaDTO persona) {
         return new ResponseEntity<>(personasService.modificacionPersona(persona), HttpStatus.OK);
     }
 }
