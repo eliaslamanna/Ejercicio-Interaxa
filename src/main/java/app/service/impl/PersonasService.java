@@ -1,7 +1,9 @@
 package app.service.impl;
 
+import app.exception.types.PersonaAlreadyExistsException;
+import app.exception.types.PersonaDoesntExistDeleteException;
+import app.exception.types.PersonaDoesntExistUpdateException;
 import app.mapper.PersonaMapper;
-import app.model.Persona;
 import app.model.dto.PersonaDTO;
 import app.repository.IPersonasRepository;
 import app.service.IPersonasService;
@@ -19,19 +21,29 @@ public class PersonasService implements IPersonasService {
     }
 
     @Override
-    public PersonaDTO altaPersona(PersonaDTO persona) {
-        personasRepository.save(PersonaMapper.createPersona(persona));
+    public PersonaDTO altaPersona(PersonaDTO persona) throws PersonaAlreadyExistsException {
+        try {
+            personasRepository.save(PersonaMapper.createPersona(persona));
+        } catch (Exception e) {
+            throw new PersonaAlreadyExistsException();
+        }
         return persona;
     }
 
     @Override
-    public PersonaDTO bajaPersona(PersonaDTO persona) {
+    public PersonaDTO bajaPersona(PersonaDTO persona) throws PersonaDoesntExistDeleteException {
+        if(!personasRepository.existsById(persona.getDni())) {
+            throw new PersonaDoesntExistDeleteException();
+        }
         personasRepository.delete(PersonaMapper.createPersona(persona));
         return persona;
     }
 
     @Override
-    public PersonaDTO modificacionPersona(PersonaDTO persona) {
+    public PersonaDTO modificacionPersona(PersonaDTO persona) throws PersonaDoesntExistUpdateException {
+        if(!personasRepository.existsById(persona.getDni())) {
+            throw new PersonaDoesntExistUpdateException();
+        }
         personasRepository.save(PersonaMapper.createPersona(persona));
         return persona;
     }

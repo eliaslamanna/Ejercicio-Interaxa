@@ -1,5 +1,8 @@
 package app.controller;
 
+import app.exception.types.PersonaAlreadyExistsException;
+import app.exception.types.PersonaDoesntExistDeleteException;
+import app.exception.types.PersonaDoesntExistUpdateException;
 import app.model.dto.PersonaDTO;
 import app.service.IPersonasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +25,17 @@ public class PersonasController {
     }
 
     @PostMapping("/alta")
-    public ResponseEntity<PersonaDTO> altaPersona(@RequestBody PersonaDTO persona) {
+    public ResponseEntity<PersonaDTO> altaPersona(@RequestBody PersonaDTO persona) throws PersonaAlreadyExistsException {
         return new ResponseEntity<>(personasService.altaPersona(persona), HttpStatus.OK);
     }
 
     @PostMapping("/baja")
-    public ResponseEntity<PersonaDTO> bajaPersona(@RequestBody PersonaDTO persona) {
+    public ResponseEntity<PersonaDTO> bajaPersona(@RequestBody PersonaDTO persona) throws PersonaDoesntExistDeleteException {
         return new ResponseEntity<>(personasService.bajaPersona(persona), HttpStatus.OK);
     }
 
     @PostMapping("/modificacion")
-    public ResponseEntity<PersonaDTO> modificacionPersona(@RequestBody PersonaDTO persona) {
+    public ResponseEntity<PersonaDTO> modificacionPersona(@RequestBody PersonaDTO persona) throws PersonaDoesntExistUpdateException {
         return new ResponseEntity<>(personasService.modificacionPersona(persona), HttpStatus.OK);
     }
 }

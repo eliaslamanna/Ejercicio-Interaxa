@@ -1,10 +1,12 @@
 package app.service;
 
-import app.model.Persona;
+import app.exception.types.PersonaAlreadyExistsException;
+import app.exception.types.PersonaDoesntExistDeleteException;
+import app.exception.types.PersonaDoesntExistUpdateException;
 import app.model.dto.PersonaDTO;
 
 public interface IPersonasService {
-    PersonaDTO altaPersona(PersonaDTO persona);
-    PersonaDTO bajaPersona(PersonaDTO persona);
-    PersonaDTO modificacionPersona(PersonaDTO persona);
+    PersonaDTO altaPersona(PersonaDTO persona) throws PersonaAlreadyExistsException;
+    PersonaDTO bajaPersona(PersonaDTO persona) throws PersonaDoesntExistDeleteException;
+    PersonaDTO modificacionPersona(PersonaDTO persona) throws PersonaDoesntExistUpdateException;
 }
