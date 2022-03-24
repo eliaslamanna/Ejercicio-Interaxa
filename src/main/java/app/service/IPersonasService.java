@@ -9,4 +9,5 @@ public interface IPersonasService {
     PersonaDTO altaPersona(PersonaDTO persona) throws PersonaAlreadyExistsException;
     PersonaDTO bajaPersona(String dniPersona) throws PersonaDoesntExistDeleteException;
     PersonaDTO modificacionPersona(PersonaDTO persona) throws PersonaDoesntExistUpdateException;
+    PersonaDTO getPersona(String dniPersona);
 }

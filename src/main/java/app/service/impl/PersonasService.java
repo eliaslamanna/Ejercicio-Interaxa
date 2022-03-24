@@ -8,6 +8,9 @@ import app.model.Persona;
 import app.model.dto.PersonaDTO;
 import app.repository.IPersonasRepository;
 import app.service.IPersonasService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.mapper.Mapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class PersonasService implements IPersonasService {
 
     private final IPersonasRepository personasRepository;
+    private ModelMapper mapper = new ModelMapper();
 
     @Autowired
     public PersonasService(IPersonasRepository personasRepository) {
@@ -47,5 +51,10 @@ public class PersonasService implements IPersonasService {
         }
         personasRepository.save(PersonaMapper.createPersona(persona));
         return persona;
+    }
+
+    @Override
+    public PersonaDTO getPersona(String dniPersona) {
+        return mapper.map(personasRepository.findById(dniPersona).get(),PersonaDTO.class);
     }
 }

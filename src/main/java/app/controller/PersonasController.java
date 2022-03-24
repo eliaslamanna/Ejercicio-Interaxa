@@ -35,4 +35,9 @@ public class PersonasController {
     public ResponseEntity<PersonaDTO> modificacionPersona(@RequestBody PersonaDTO persona) throws PersonaDoesntExistUpdateException {
         return new ResponseEntity<>(personasService.modificacionPersona(persona), HttpStatus.OK);
     }
+
+    @GetMapping("/obtener/{dniPersona}")
+    public ResponseEntity<PersonaDTO> getPersona(@PathVariable String dniPersona) {
+        return new ResponseEntity<>(personasService.getPersona(dniPersona), HttpStatus.OK);
+    }
 }
